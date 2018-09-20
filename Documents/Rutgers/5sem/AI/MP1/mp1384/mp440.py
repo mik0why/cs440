@@ -1,5 +1,4 @@
 
-
 '''
 GCD algorithm
 '''
@@ -23,7 +22,14 @@ def gcd(a, b):
 Rectangles on a rubik's cube
 '''
 def rubiks(n):
-    return -1
+
+    def fact(n):
+        if n == 0: 
+            return 1
+        else:
+            return n * fact(n-1)
+
+    return 6 * fact(n+1) * fact(n+1) / 4      
 
 
 '''
@@ -48,12 +54,22 @@ def guess_unlimited(n, is_this_it):
         
     return guess
     
-guess_unlimited(10, is_this_it) #need to check how this is invoked
 
 '''
 Guessing a number where you can only make two guesses that are larger
 '''
 def guess_limited(n, is_this_smaller):
+    from random import *
+    number = randrange(1, n)
+    guess = input("input your number")
+    fail_count = 0
+
+    while(is_this_smaller(n/2) == False){
+        fail_count=+1
+        n=/2
+
+    }
+
 	counter = 0 #keeping track of how many 'Fails'
     return -1
         
