@@ -1,4 +1,4 @@
-
+import main
 '''
 GCD algorithm
 '''
@@ -44,39 +44,68 @@ Guessing a number
 #         return guess'''
 #     return -1
         
-def guess_unlimited(n, is_this_it):
-    from random import *
-    number = randrange(1, n)
-    guess = input("input your number")
-    
-    while(is_this_it(guess)!=True):
-        guess = input("incorrect, input your number again")
-        
-    return guess
+# def guess_unlimited(n, is_this_it):
+#     from random import *
+#     number = randrange(1, n)
+#     guess = input("input your number")
+#
+#     while(is_this_it(guess)!=True):
+#         guess = input("incorrect, input your number again")
+#
+#     return guess
     
 
 '''
 Guessing a number where you can only make two guesses that are larger
 '''
 def guess_limited(n, is_this_smaller):
-    from random import *
-    number = randrange(1, n)
-    guess = input("input your number")
+    import math
+    # number = randrange(1, n)
+    # guess = input("input your number")
     fail_count = 0
+    guess = int(math.ceil(n / 2))
+    print('guess ', guess)
 
-    while(is_this_smaller(n/2) == False){
-        fail_count=+1
-        n=/2
+    lowerbound = 1
+    upperbound = n
 
-    }
+    # only allows one fail
+    while fail_count == 0:
+        smaller = is_this_smaller(guess)
+        if smaller == True:
+            # guess is smaller than our number
+            lowerbound = guess
+            guess = int(math.ceil((lowerbound + upperbound)/2))
+        elif smaller == False:
+            # guess is not smaller than our number
+            upperbound = guess
+            fail_count = 1
+            break
 
-	counter = 0 #keeping track of how many 'Fails'
-    return -1
-        
+    # have one fail, so start from the beginning (presumably returns true)
+    # then at first false, means we found our number
+    for a in range(lowerbound, upperbound):
+        print(a)
+        if is_this_smaller(a) == False:
+            guess = a
+            break
+
+    # program should never reach this point
+    # if it does, something has gone terribly wrong
+    return guess
+
+
+
+
+
+
+
+
+
+
 '''
 Guessing a number, bonus problem
 '''
 def guess_limited_plus(n, is_this_smaller):
     return -1
         
-
