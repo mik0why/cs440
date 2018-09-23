@@ -1,4 +1,6 @@
 import main
+import math
+
 '''
 GCD algorithm
 '''
@@ -59,12 +61,10 @@ Guessing a number
 Guessing a number where you can only make two guesses that are larger
 '''
 def guess_limited(n, is_this_smaller):
-    import math
     # number = randrange(1, n)
     # guess = input("input your number")
     fail_count = 0
     guess = int(math.ceil(n / 2))
-    print('guess ', guess)
 
     lowerbound = 1
     upperbound = n
@@ -107,5 +107,26 @@ def guess_limited(n, is_this_smaller):
 Guessing a number, bonus problem
 '''
 def guess_limited_plus(n, is_this_smaller):
-    return -1
-        
+    guess = int(math.ceil(n / 2))
+    print('guess ', guess)
+
+    lowerbound = 1
+    upperbound = n
+
+    # only allows one fail
+    while upperbound - lowerbound > 1:
+        smaller = is_this_smaller(guess)
+        if smaller == True:
+            # guess is smaller than our number
+            lowerbound = guess
+            guess = int(math.ceil((lowerbound + upperbound) / 2))
+        elif smaller == False:
+            # guess is not smaller than our number
+            upperbound = guess
+            guess = int(math.ceil((lowerbound + upperbound) / 2))
+
+    guess = upperbound
+
+    # program should never reach this point
+    # if it does, something has gone terribly wrong
+    return guess
